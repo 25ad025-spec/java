@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloodCare | Blood Donation Management System</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#f8fafc;
+    color:#172033;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    height:76px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid #edf0f5;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:'Plus Jakarta Sans';
+    font-size:22px;
+    font-weight:800;
+}
+
+.logoIcon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#e91e4d,#b0002a);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:22px;
+    box-shadow:0 8px 22px rgba(220,20,60,.25);
+}
+
+.logo span{
+    color:#d91645;
+}
+
+.navLinks{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.navLinks a{
+    text-decoration:none;
+    color:#647084;
+    font-size:14px;
+    font-weight:600;
+}
+
+.navLinks a:hover{
+    color:#d91645;
+}
+
+.navBtn{
+    background:#d91645;
+    color:white !important;
+    padding:12px 20px;
+    border-radius:10px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:650px;
+    padding:80px 7%;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+    background:
+    radial-gradient(circle at 90% 20%,rgba(232,30,76,.13),transparent 35%),
+    radial-gradient(circle at 10% 90%,rgba(255,70,110,.08),transparent 35%),
+    #fff;
+}
+
+.heroContent{
+    max-width:650px;
+}
+
+.badge{
+    display:inline-flex;
+    padding:9px 14px;
+    border-radius:30px;
+    background:#fff0f3;
+    color:#d91645;
+    font-weight:700;
+    font-size:13px;
+    margin-bottom:22px;
+}
+
+.hero h1{
+    font-family:'Plus Jakarta Sans';
+    font-size:58px;
+    line-height:1.08;
+    letter-spacing:-2px;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#d91645;
+}
+
+.hero p{
+    color:#6d7788;
+    font-size:17px;
+    line-height:1.8;
+    max-width:580px;
+    margin-bottom:32px;
+}
+
+.heroButtons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.primary{
+    background:#d91645;
+    color:white;
+    padding:15px 25px;
+    border:none;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 12px 28px rgba(217,22,69,.22);
+}
+
+.secondary{
+    background:white;
+    border:1px solid #e4e8ef;
+    padding:15px 25px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.primary:hover{
+    transform:translateY(-2px);
+}
+
+/* HERO BLOOD DROP */
+
+.heroVisual{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.glow{
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    background:#ffe4ea;
+    filter:blur(10px);
+}
+
+.bloodDrop{
+    position:relative;
+    width:240px;
+    height:300px;
+    background:linear-gradient(145deg,#f52c5d,#a80029);
+    border-radius:65% 65% 70% 70% / 58% 58% 85% 85%;
+    transform:rotate(45deg);
+    box-shadow:
+    0 35px 70px rgba(170,0,40,.3),
+    inset -20px -20px 35px rgba(80,0,20,.2);
+    animation:float 4s ease-in-out infinite;
+}
+
+.bloodDrop:after{
+    content:'';
+    position:absolute;
+    width:65px;
+    height:65px;
+    background:rgba(255,255,255,.22);
+    border-radius:50%;
+    top:55px;
+    left:60px;
+}
+
+@keyframes float{
+    0%,100%{transform:rotate(45deg) translateY(0)}
+    50%{transform:rotate(45deg) translateY(-18px)}
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    padding:0 7%;
+    margin-top:-35px;
+    position:relative;
+    z-index:5;
+}
+
+.statGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:white;
+    border-radius:20px;
+    box-shadow:0 15px 50px rgba(20,30,50,.08);
+    overflow:hidden;
+}
+
+.stat{
+    padding:27px;
+    text-align:center;
+    border-right:1px solid #edf0f5;
+}
+
+.stat:last-child{
+    border:none;
+}
+
+.stat h2{
+    color:#d91645;
+    font-size:30px;
+}
+
+.stat p{
+    color:#7a8494;
+    margin-top:5px;
+    font-size:13px;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:90px 7%;
+}
+
+.sectionTitle{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.sectionTitle span{
+    color:#d91645;
+    font-weight:800;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+.sectionTitle h2{
+    font-family:'Plus Jakarta Sans';
+    font-size:38px;
+    margin-top:10px;
+}
+
+.sectionTitle p{
+    color:#778194;
+    margin-top:10px;
+}
+
+/* ================= BLOOD CARDS ================= */
+
+.bloodGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.bloodCard{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #edf0f5;
+    transition:.3s;
+}
+
+.bloodCard:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(30,30,50,.09);
+}
+
+.bloodTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.group{
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    background:#fff0f3;
+    color:#d91645;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:18px;
+    font-weight:800;
+}
+
+.status{
+    color:#17a673;
+    font-size:12px;
+    font-weight:700;
+}
+
+.stock{
+    margin-top:20px;
+    font-size:26px;
+    font-weight:800;
+}
+
+.stock span{
+    color:#8791a2;
+    font-size:13px;
+    font-weight:500;
+}
+
+.progress{
+    height:7px;
+    background:#edf0f5;
+    border-radius:20px;
+    margin-top:15px;
+    overflow:hidden;
+}
+
+.progress div{
+    height:100%;
+    background:linear-gradient(90deg,#d91645,#ff5277);
+    border-radius:20px;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+    background:#fff;
+}
+
+.featureGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.feature{
+    padding:30px;
+    background:#f9fafc;
+    border:1px solid #edf0f5;
+    border-radius:18px;
+}
+
+.featureIcon{
+    width:52px;
+    height:52px;
+    background:#fff0f3;
+    color:#d91645;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    margin-bottom:20px;
+}
+
+.feature h3{
+    margin-bottom:10px;
+}
+
+.feature p{
+    color:#737e90;
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* ================= FORMS ================= */
+
+.formSection{
+    background:#f8fafc;
+}
+
+.formBox{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:40px;
+    border-radius:22px;
+    box-shadow:0 15px 45px rgba(30,40,60,.07);
+}
+
+.formGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.inputGroup{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.inputGroup.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    font-weight:700;
+    color:#475166;
+}
+
+input,select,textarea{
+    border:1px solid #dfe4ec;
+    border-radius:11px;
+    padding:14px;
+    outline:none;
+    font-family:inherit;
+    background:#fff;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:#d91645;
+    box-shadow:0 0 0 3px #fff0f3;
+}
+
+textarea{
+    resize:none;
+    min-height:100px;
+}
+
+.formButton{
+    margin-top:25px;
+    width:100%;
+}
+
+/* ================= SEARCH ================= */
+
+.searchBox{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:28px;
+    border-radius:20px;
+    box-shadow:0 15px 45px rgba(30,40,60,.07);
+}
+
+.searchControls{
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:15px;
+}
+
+.results{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.donorCard{
+    padding:20px;
+    border:1px solid #edf0f5;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#fff0f3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#d91645;
+    font-weight:800;
+}
+
+.donorInfo h4{
+    margin-bottom:4px;
+}
+
+.donorInfo p{
+    color:#7d8798;
+    font-size:12px;
+}
+
+/* ================= ADMIN ================= */
+
+.adminSection{
+    background:#101522;
+    color:white;
+}
+
+.adminBox{
+    max-width:1050px;
+    margin:auto;
+}
+
+.loginCard{
+    max-width:430px;
+    margin:auto;
+    background:#181e2d;
+    padding:35px;
+    border-radius:20px;
+    border:1px solid #2b3346;
+}
+
+.loginCard input{
+    width:100%;
+    margin:8px 0 18px;
+    background:#101522;
+    color:white;
+    border-color:#343c50;
+}
+
+.dashboard{
+    display:none;
+}
+
+.dashboardTop{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.dashCard{
+    background:#181e2d;
+    padding:22px;
+    border:1px solid #2b3346;
+    border-radius:16px;
+}
+
+.dashCard small{
+    color:#9ca6b8;
+}
+
+.dashCard h2{
+    margin-top:10px;
+    color:#ff5277;
+}
+
+.chart{
+    background:#181e2d;
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #2b3346;
+}
+
+.bar{
+    margin:18px 0;
+}
+
+.barTop{
+    display:flex;
+    justify-content:space-between;
+    color:#c4cada;
+    font-size:13px;
+}
+
+.barLine{
+    height:9px;
+    background:#292f40;
+    border-radius:20px;
+    margin-top:7px;
+    overflow:hidden;
+}
+
+.barLine div{
+    height:100%;
+    background:linear-gradient(90deg,#e91e4d,#ff6685);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#0c1019;
+    color:#9ba5b7;
+    padding:35px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+footer strong{
+    color:white;
+}
+
+/* ================= POPUP ================= */
+
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(10,15,25,.55);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+}
+
+.popupCard{
+    background:white;
+    width:380px;
+    padding:35px;
+    border-radius:22px;
+    text-align:center;
+    animation:pop .3s ease;
+}
+
+.check{
+    width:65px;
+    height:65px;
+    margin:auto;
+    border-radius:50%;
+    background:#e8fff5;
+    color:#12a16c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+.popupCard h2{
+    margin:18px 0 8px;
+}
+
+.popupCard p{
+    color:#788294;
+    font-size:14px;
+}
+
+@keyframes pop{
+    from{transform:scale(.8);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .navLinks{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .heroContent{
+        margin:auto;
+    }
+
+    .heroButtons{
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .heroVisual{
+        margin-top:50px;
+    }
+
+    .statGrid,
+    .bloodGrid,
+    .featureGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .results{
+        grid-template-columns:1fr;
+    }
+
+    .dashboardTop{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        padding:0 5%;
+    }
+
+    section{
+        padding:65px 5%;
+    }
+
+    .hero{
+        padding:60px 5%;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .statGrid,
+    .bloodGrid,
+    .featureGrid,
+    .formGrid,
+    .searchControls,
+    .dashboardTop{
+        grid-template-columns:1fr;
+    }
+
+    .stat{
+        border-right:none;
+        border-bottom:1px solid #edf0f5;
+    }
+
+    .bloodDrop{
+        width:170px;
+        height:215px;
+    }
+
+    .formBox{
+        padding:25px;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+<div class="logo">
+    <div class="logoIcon">♥</div>
+    Blood<span>Care</span>
+</div>
+
+<ul class="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#availability">Blood Stock</a></li>
+    <li><a href="#donate">Donate</a></li>
+    <li><a href="#search">Find Blood</a></li>
+    <li><a href="#request">Emergency</a></li>
+    <li><a href="#admin">Admin</a></li>
+</ul>
+
+<a href="#donate" class="navBtn">Become a Donor</a>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+<div class="heroContent">
+
+<div class="badge">● LIVE BLOOD DONATION NETWORK</div>
+
+<h1>
+Every Drop Can
+<span>Save a Life.</span>
+</h1>
+
+<p>
+BloodCare connects generous donors with patients in need.
+Register as a donor, find available blood groups, and respond
+to emergency requirements — all in one simple platform.
+</p>
+
+<div class="heroButtons">
+<button class="primary" onclick="goTo('donate')">
+🩸 Donate Blood
+</button>
+
+<button class="secondary" onclick="goTo('search')">
+🔍 Find Blood
+</button>
+</div>
+
+</div>
+
+<div class="heroVisual">
+
+<div class="glow"></div>
+<div class="bloodDrop"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<div class="stats">
+
+<div class="statGrid">
+
+<div class="stat">
+<h2>1,248+</h2>
+<p>Registered Donors</p>
+</div>
+
+<div class="stat">
+<h2>856</h2>
+<p>Lives Supported</p>
+</div>
+
+<div class="stat">
+<h2>8</h2>
+<p>Blood Groups</p>
+</div>
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Emergency Support</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ================= BLOOD AVAILABILITY ================= -->
+
+<section id="availability">
+
+<div class="sectionTitle">
+<span>Blood Inventory</span>
+<h2>Current Blood Availability</h2>
+<p>Live overview of available blood units.</p>
+</div>
+
+<div class="bloodGrid">
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">A+</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">24 <span>units</span></div>
+<div class="progress"><div style="width:80%"></div></div>
+</div>
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">A−</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">08 <span>units</span></div>
+<div class="progress"><div style="width:35%"></div></div>
+</div>
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">B+</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">31 <span>units</span></div>
+<div class="progress"><div style="width:90%"></div></div>
+</div>
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">B−</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">06 <span>units</span></div>
+<div class="progress"><div style="width:28%"></div></div>
+</div>
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">AB+</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">14 <span>units</span></div>
+<div class="progress"><div style="width:55%"></div></div>
+</div>
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">AB−</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">04 <span>units</span></div>
+<div class="progress"><div style="width:20%"></div></div>
+</div>
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">O+</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">42 <span>units</span></div>
+<div class="progress"><div style="width:95%"></div></div>
+</div>
+
+<div class="bloodCard">
+<div class="bloodTop">
+<div class="group">O−</div>
+<div class="status">● Available</div>
+</div>
+<div class="stock">07 <span>units</span></div>
+<div class="progress"><div style="width:30%"></div></div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+<div class="sectionTitle">
+<span>Why BloodCare?</span>
+<h2>Everything You Need</h2>
+<p>A smart and simple blood donation management platform.</p>
+</div>
+
+<div class="featureGrid">
+
+<div class="feature">
+<div class="featureIcon">🩸</div>
+<h3>Easy Donation</h3>
+<p>Register yourself as a donor and help patients who urgently need blood.</p>
+</div>
+
+<div class="feature">
+<div class="featureIcon">🔍</div>
+<h3>Quick Search</h3>
+<p>Search donors based on blood group and location within seconds.</p>
+</div>
+
+<div class="feature">
+<div class="featureIcon">🚨</div>
+<h3>Emergency Requests</h3>
+<p>Submit urgent blood requirements and connect with potential donors.</p>
+</div>
+
+<div class="feature">
+<div class="featureIcon">📊</div>
+<h3>Smart Dashboard</h3>
+<p>Administrators can monitor donors, requests and blood inventory.</p>
+</div>
+
+<div class="feature">
+<div class="featureIcon">🔐</div>
+<h3>Secure Access</h3>
+<p>Admin dashboard is protected using a simple authentication system.</p>
+</div>
+
+<div class="feature">
+<div class="featureIcon">💾</div>
+<h3>Local Data Storage</h3>
+<p>Donor and emergency request information is saved inside the browser.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DONOR ================= -->
+
+<section class="formSection" id="donate">
+
+<div class="sectionTitle">
+<span>Become A Hero</span>
+<h2>Donor Registration</h2>
+<p>Your one registration could help save someone's life.</p>
+</div>
+
+<div class="formBox">
+
+<form id="donorForm">
+
+<div class="formGrid">
+
+<div class="inputGroup">
+<label>Full Name</label>
+<input id="donorName" required placeholder="Enter your name">
+</div>
+
+<div class="inputGroup">
+<label>Phone Number</label>
+<input id="donorPhone" required placeholder="Enter phone number">
+</div>
+
+<div class="inputGroup">
+<label>Blood Group</label>
+<select id="donorBlood" required>
+<option value="">Select blood group</option>
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+</select>
+</div>
+
+<div class="inputGroup">
+<label>City / Location</label>
+<input id="donorCity" required placeholder="Eg. Chennai">
+</div>
+
+<div class="inputGroup full">
+<label>Email Address</label>
+<input id="donorEmail" type="email" required placeholder="example@gmail.com">
+</div>
+
+</div>
+
+<button class="primary formButton">
+Register as Blood Donor ❤️
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<section id="search">
+
+<div class="sectionTitle">
+<span>Find A Donor</span>
+<h2>Search Blood Availability</h2>
+<p>Find registered donors based on blood group and location.</p>
+</div>
+
+<div class="searchBox">
+
+<div class="searchControls">
+
+<select id="searchBlood">
+<option value="">All Blood Groups</option>
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+</select>
+
+<input id="searchCity" placeholder="Enter city">
+
+<button class="primary" onclick="searchDonors()">Search</button>
+
+</div>
+
+<div class="results" id="results"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= EMERGENCY ================= -->
+
+<section class="formSection" id="request">
+
+<div class="sectionTitle">
+<span>Emergency Support</span>
+<h2>Request Blood</h2>
+<p>For urgent requirements, submit your request below.</p>
+</div>
+
+<div class="formBox">
+
+<form id="requestForm">
+
+<div class="formGrid">
+
+<div class="inputGroup">
+<label>Patient Name</label>
+<input id="patientName" required placeholder="Patient name">
+</div>
+
+<div class="inputGroup">
+<label>Hospital Name</label>
+<input id="hospital" required placeholder="Hospital name">
+</div>
+
+<div class="inputGroup">
+<label>Required Blood Group</label>
+<select id="requestBlood" required>
+<option value="">Select blood group</option>
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+</select>
+</div>
+
+<div class="inputGroup">
+<label>Units Required</label>
+<input id="units" type="number" min="1" required placeholder="Eg. 2">
+</div>
+
+<div class="inputGroup full">
+<label>Location</label>
+<input id="requestCity" required placeholder="Hospital city/location">
+</div>
+
+<div class="inputGroup full">
+<label>Additional Information</label>
+<textarea id="message" placeholder="Enter emergency details..."></textarea>
+</div>
+
+</div>
+
+<button class="primary formButton">
+🚨 Submit Emergency Request
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section class="adminSection" id="admin">
+
+<div class="sectionTitle">
+<span>Administration</span>
+<h2>BloodCare Admin Dashboard</h2>
+<p style="color:#9ca6b8">
+Manage donors, requests and blood inventory.
+</p>
+</div>
+
+<div class="adminBox">
+
+<div class="loginCard" id="loginCard">
+
+<h3>🔐 Admin Login</h3>
+
+<br>
+
+<label style="color:#cbd2df">Username</label>
+<input id="adminUser" placeholder="Enter username">
+
+<label style="color:#cbd2df">Password</label>
+<input id="adminPass" type="password" placeholder="Enter password">
+
+<button class="primary formButton" onclick="adminLogin()">
+Login to Dashboard
+</button>
+
+<p style="margin-top:15px;color:#8f99aa;font-size:12px">
+Demo: admin / admin123
+</p>
+
+</div>
+
+
+<div class="dashboard" id="dashboard">
+
+<div class="dashboardTop">
+
+<div class="dashCard">
+<small>Total Donors</small>
+<h2 id="totalDonors">0</h2>
+</div>
+
+<div class="dashCard">
+<small>Blood Requests</small>
+<h2 id="totalRequests">0</h2>
+</div>
+
+<div class="dashCard">
+<small>Available Units</small>
+<h2>136</h2>
+</div>
+
+<div class="dashCard">
+<small>Lives Supported</small>
+<h2>856</h2>
+</div>
+
+</div>
+
+
+<div class="chart">
+
+<h3>Blood Group Inventory</h3>
+
+<div class="bar">
+<div class="barTop"><span>A+</span><span>80%</span></div>
+<div class="barLine"><div style="width:80%"></div></div>
+</div>
+
+<div class="bar">
+<div class="barTop"><span>B+</span><span>90%</span></div>
+<div class="barLine"><div style="width:90%"></div></div>
+</div>
+
+<div class="bar">
+<div class="barTop"><span>O+</span><span>95%</span></div>
+<div class="barLine"><div style="width:95%"></div></div>
+</div>
+
+<div class="bar">
+<div class="barTop"><span>AB+</span><span>55%</span></div>
+<div class="barLine"><div style="width:55%"></div></div>
+</div>
+
+</div>
+
+<br>
+
+<button class="secondary" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div>
+<strong>BloodCare</strong><br>
+Making every drop count.
+</div>
+
+<div>
+© 2026 BloodCare • Blood Donation Management System
+</div>
+
+</footer>
+
+
+<!-- ================= POPUP ================= -->
+
+<div class="popup" id="popup">
+
+<div class="popupCard">
+
+<div class="check">✓</div>
+
+<h2 id="popupTitle">Success!</h2>
+
+<p id="popupMessage">
+Your request has been successfully submitted.
+</p>
+
+<br>
+
+<button class="primary" onclick="closePopup()">
+Continue
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ================= NAVIGATION ================= */
+
+function goTo(id){
+    document.getElementById(id).scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+
+/* ================= POPUP ================= */
+
+function showPopup(title,message){
+
+    document.getElementById("popupTitle").innerText=title;
+    document.getElementById("popupMessage").innerText=message;
+
+    document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+
+/* ================= DONOR REGISTRATION ================= */
+
+document.getElementById("donorForm").addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    let donors=JSON.parse(localStorage.getItem("bloodcareDonors") || "[]");
+
+    let donor={
+        name:document.getElementById("donorName").value,
+        phone:document.getElementById("donorPhone").value,
+        blood:document.getElementById("donorBlood").value,
+        city:document.getElementById("donorCity").value,
+        email:document.getElementById("donorEmail").value
+    };
+
+    donors.push(donor);
+
+    localStorage.setItem("bloodcareDonors",JSON.stringify(donors));
+
+    this.reset();
+
+    showPopup(
+        "Registration Successful ❤️",
+        "Thank you for becoming a BloodCare donor. Your information has been saved."
+    );
+
+});
+
+
+/* ================= BLOOD REQUEST ================= */
+
+document.getElementById("requestForm").addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    let requests=JSON.parse(localStorage.getItem("bloodcareRequests") || "[]");
+
+    let request={
+        patient:document.getElementById("patientName").value,
+        hospital:document.getElementById("hospital").value,
+        blood:document.getElementById("requestBlood").value,
+        units:document.getElementById("units").value,
+        city:document.getElementById("requestCity").value,
+        message:document.getElementById("message").value
+    };
+
+    requests.push(request);
+
+    localStorage.setItem("bloodcareRequests",JSON.stringify(requests));
+
+    this.reset();
+
+    showPopup(
+        "Emergency Request Sent 🚨",
+        "Your blood requirement has been recorded successfully."
+    );
+
+});
+
+
+/* ================= SEARCH ================= */
+
+function searchDonors(){
+
+    let donors=JSON.parse(localStorage.getItem("bloodcareDonors") || "[]");
+
+    let blood=document.getElementById("searchBlood").value;
+    let city=document.getElementById("searchCity").value.toLowerCase();
+
+    let filtered=donors.filter(d=>{
+
+        let bloodMatch=!blood || d.blood===blood;
+        let cityMatch=!city || d.city.toLowerCase().includes(city);
+
+        return bloodMatch && cityMatch;
+
+    });
+
+    let results=document.getElementById("results");
+
+    if(filtered.length===0){
+
+        results.innerHTML=`
+        <div style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:30px;
+        color:#7d8798">
+        No matching donors found.
+        </div>`;
+
+        return;
+    }
+
+    results.innerHTML=filtered.map(d=>`
+
+    <div class="donorCard">
+
+        <div class="avatar">${d.blood}</div>
+
+        <div class="donorInfo">
+
+            <h4>${d.name}</h4>
+
+            <p>📍 ${d.city}</p>
+
+            <p>📞 ${d.phone}</p>
+
+        </div>
+
+    </div>
+
+    `).join("");
+
+}
+
+
+/* ================= ADMIN LOGIN ================= */
+
+function adminLogin(){
+
+    let username=document.getElementById("adminUser").value;
+    let password=document.getElementById("adminPass").value;
+
+    if(username==="admin" && password==="admin123"){
+
+        sessionStorage.setItem("bloodcareAdmin","true");
+
+        document.getElementById("loginCard").style.display="none";
+        document.getElementById("dashboard").style.display="block";
+
+        updateDashboard();
+
+    }
+
+    else{
+
+        showPopup(
+            "Login Failed",
+            "Invalid username or password."
+        );
+
+    }
+
+}
+
+
+/* ================= DASHBOARD ================= */
+
+function updateDashboard(){
+
+    let donors=JSON.parse(localStorage.getItem("bloodcareDonors") || "[]");
+
+    let requests=JSON.parse(localStorage.getItem("bloodcareRequests") || "[]");
+
+    document.getElementById("totalDonors").innerText=donors.length;
+
+    document.getElementById("totalRequests").innerText=requests.length;
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+
+    sessionStorage.removeItem("bloodcareAdmin");
+
+    document.getElementById("dashboard").style.display="none";
+
+    document.getElementById("loginCard").style.display="block";
+
+}
+
+
+/* ================= LOAD ================= */
+
+window.addEventListener("load",function(){
+
+    if(sessionStorage.getItem("bloodcareAdmin")==="true"){
+
+        document.getElementById("loginCard").style.display="none";
+
+        document.getElementById("dashboard").style.display="block";
+
+        updateDashboard();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
